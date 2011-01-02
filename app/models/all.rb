@@ -3,7 +3,7 @@ class LogFile
 
   property :id,               Serial
   property :log_name,         String,   :index => :log_name
-  property :path_name,        String
+  property :path_name,        Text
   property :last_file_size,   Integer,  :default => 0
   property :last_line_at,     Integer,  :default => 0
   property :active,           Boolean,  :default => true
@@ -18,7 +18,7 @@ class RequestFile
 
   property :id,               Serial
   property :log_file_id,      Integer
-  property :file_name,        String,     :index => :file_name
+  property :file_name,        Text
   property :uuid,             String,     :unique_index => :uuid
   property :parent_id,        Integer
   property :is_public,        Boolean,    :default => false

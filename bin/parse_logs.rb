@@ -36,7 +36,7 @@ begin
       
       # Fetch file information
       io_file = File.new(tmp_log_file, 'r')
-      log_file_size, log_total_lines = io_file.size, io_file.lines.count
+      log_file_size, log_total_lines = io_file.size, IO.readlines(log_file).length
 
       # Start from zeros if new or altered log file
       @log.update(:last_line_at => 0, :last_file_size => 0) if @log.last_file_size > log_file_size || @log.last_line_at > log_total_lines
@@ -44,7 +44,7 @@ begin
 
       # Start parsing
       io_lines = IO.readlines(log_file)
-      io_lines[last_line_at..log_total_lines].each_with_index do |line, i|
+      io_lines[last_line_at..io_lines.length].each_with_index do |line, i|
         # Filter out bad lines from log file
         if line.match(log_match)
           req_info = line.strip.gsub(log_match, log_replace)

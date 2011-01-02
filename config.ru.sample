@@ -1,0 +1,18 @@
+require 'rubygems'
+require 'bundler'
+
+Bundler.require
+
+ROOT_PATH = File.expand_path(File.dirname(__FILE__))
+
+set :environment,   :production
+set :root,          ROOT_PATH
+set :app_file,      File.join(ROOT_PATH, 'dynlog.rb')
+disable :run
+
+log = File.new("#{ROOT_PATH}/log/production.log", "a")
+STDOUT.reopen(log)
+STDERR.reopen(log)
+
+require File.join(ROOT_PATH, 'dynlog.rb')
+run Sinatra::Application

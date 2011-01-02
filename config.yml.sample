@@ -1,0 +1,30 @@
+development: &local
+  directory_path:     /
+  tmp_path:           ROOT/tmp
+  uuid_salt:          'CHANGE-THIS!!!'
+
+  db_type:            mysql
+  db_connection:      mysql://root@localhost/dynlog_dev
+
+  log_files:
+    log1:
+      file:         "log/test.log"
+      parse:        "^\[([A-Z0-9\:\-\s\/]+)\] \d+ -- ([A-Z0-9\/_\-\.\?\=\%\&\:]+).* (\d{1,}\.\d{1,}\.\d{1,}\.\d{1,}).*$"
+
+      # Response should be able to out as follows:
+        # FILENAME    TIMESTAMP    IP ADDRESS
+      response:     "\2\t\1\t\3"
+      filter:       
+
+
+
+production:
+  <<: *local
+
+
+staging:
+  <<: *local
+
+  
+test:
+  <<: *local

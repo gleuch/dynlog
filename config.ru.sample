@@ -1,18 +1,25 @@
-require 'rubygems'
-require 'bundler'
+# Fixes for any ENV issues...
+env_hotfix = File.join(ROOT_PATH, 'bin', '_env_hotfix.rb')
+require env_hotfix if File.exists?(env_hotfix)
 
+# Gems
+require 'rubygems'
+Gem.clear_paths
+require 'bundler'
 Bundler.require
 
+# Setup config options
 ROOT_PATH = File.expand_path(File.dirname(__FILE__))
-
 set :environment,   :production
 set :root,          ROOT_PATH
 set :app_file,      File.join(ROOT_PATH, 'dynlog.rb')
 disable :run
 
+# Setup log file...
 log = File.new("#{ROOT_PATH}/log/production.log", "a")
 STDOUT.reopen(log)
 STDERR.reopen(log)
 
+# Start 'er up!
 require File.join(ROOT_PATH, 'dynlog.rb')
 run Sinatra::Application

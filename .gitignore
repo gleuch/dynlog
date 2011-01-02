@@ -4,3 +4,4 @@ log/*
 config.yml
 config.ru
 .bundle/*
+bin/_env_hotfix.rb

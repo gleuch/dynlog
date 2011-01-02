@@ -3,8 +3,13 @@ ROOT_PATH = File.expand_path(File.dirname(__FILE__) + '/..') if !defined?(ROOT_P
 LOG_FILE = 'scripts' if !defined?(LOG_FILE) || LOG_FILE.empty?
 
 
-# Requires
+# Fixes for any ENV issues...
+env_hotfix = File.join(ROOT_PATH, 'bin', '_env_hotfix.rb')
+require env_hotfix if File.exists?(env_hotfix)
+
+# Gems
 require 'rubygems'
+Gem.clear_paths
 require 'bundler'
 Bundler.require
 

@@ -1,5 +1,5 @@
 get '/info.json' do
-  @files = params[:file]
+  @files, callback = params[:file], params[:callback]
 
   unless @files.blank?
     json = {}
@@ -19,5 +19,8 @@ get '/info.json' do
     json = {:error => 'There are no requests to parse.'}
   end
 
-  json.to_json
+  str = json.to_json
+  str = "#{callback}(#{str});" unless callback.blank?
+
+  str
 end

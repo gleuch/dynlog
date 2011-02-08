@@ -1,1 +1,4 @@
 Note, it is best to disable your general log rotation script for log files you wish to parse to ensure accurate counts. Log rotation will be done manually by this script.
+
+
+MIT Licensed, 2011 by Greg Leuch (http://gleu.ch)
